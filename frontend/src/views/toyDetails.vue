@@ -6,11 +6,11 @@
       <p>Type: {{ toy.type }}</p>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Est qui labore
-        itaque, sed rerum facere, illum soluta veritatis maiores saepe magnam
-        tempore sequi earum autem optio aliquam provident accusamus quod.
+        itaque, sed rerum facere, illum soluta veritatis maiores saepe magnam.
       </p>
       <button @click="addReview = !addReview">Add review</button>
       <add-review v-if="addReview" @reviewSaved="saveReview"></add-review>
+      <review-list></review-list>
       <img :src="toy.img" />
       <router-link to="/toy">Back</router-link>
     </div>
@@ -23,6 +23,7 @@
 <script>
 import { toyService } from "../services/toy-service.js";
 import addReview from "../cmps/addReview";
+import reviewList from "../cmps/review-list";
 
 export default {
   name: "toyDetails",
@@ -30,6 +31,7 @@ export default {
     return {
       toy: null,
       addReview: false,
+      toyReviews: null,
     };
   },
   methods: {
@@ -39,7 +41,9 @@ export default {
       });
     },
     saveReview(review) {
+      review.toyId = this.$route.params.toyId;
       console.log("review", review);
+      this.$store.dispatch({ type: "addReview", review });
     },
   },
   computed: {
@@ -49,11 +53,15 @@ export default {
   },
   created() {
     const id = this.$route.params.toyId;
-    console.log(id);
     this.getToyById(id);
+    this.toyReviews = this.$store.dispatch({
+      type: "loadReviews",
+      filterBy: { toyId: id },
+    });
   },
   components: {
     addReview,
+    reviewList,
   },
 };
 </script>

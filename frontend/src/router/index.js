@@ -6,6 +6,7 @@ import about from '../views/about.vue';
 import edit from '../views/edit.vue';
 import toyDetails from '../views/toyDetails.vue';
 import userPage from '../views/user.vue';
+import reviewPage from '../views/review.vue';
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/user',
     name: 'User',
     component: userPage,
+  },
+  {
+    path: '/review',
+    name: 'Review',
+    component: reviewPage,
   },
   {
     path: '/toy',

@@ -7,9 +7,9 @@ const { log } = require('../../middlewares/logger.middleware');
 const { addReview, getReviews, deleteReview } = require('./review.controller');
 const router = express.Router();
 
-// middleware that is specific to this router
-// router.use(requireAuth)
-
+// router.get('/', getReviews);
+// router.post('/', addReview);
+// router.delete('/:id', deleteReview);
 router.get('/', log, getReviews);
 router.post('/', requireAuth, addReview);
 router.delete('/:id', requireAuth, deleteReview);

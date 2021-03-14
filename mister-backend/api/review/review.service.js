@@ -1,100 +1,108 @@
-const dbService = require('../../services/db.service')
-const ObjectId = require('mongodb').ObjectId
-const asyncLocalStorage = require('../../services/als.service')
+const dbService = require('../../services/db.service');
+const ObjectId = require('mongodb').ObjectId;
+const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterBy = {}) {
-    try {
-        // const criteria = _buildCriteria(filterBy)
-        const collection = await dbService.getCollection('review')
-        // const reviews = await collection.find(criteria).toArray()
-        var reviews = await collection.aggregate([
-            {
-                $match: filterBy
-            },
-            {
-                $lookup:
-                {
-                    from: 'user',
-                    localField: 'byUserId',
-                    foreignField: '_id',
-                    as: 'byUser'
-                }
-            },
-            {
-                $unwind: '$byUser'
-            },
-            {
-                $lookup:
-                {
-                    from: 'user',
-                    localField: 'aboutUserId',
-                    foreignField: '_id',
-                    as: 'aboutUser'
-                }
-            },
-            {
-                $unwind: '$aboutUser'
-            }
-        ]).toArray()
-        reviews = reviews.map(review => {
-            review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
-            delete review.byUserId
-            delete review.aboutUserId
-            return review
-        })
+  console.log('filterBy',filterBy);
+  try {
+    // const criteria = _buildCriteria(filterBy)
+    const collection = await dbService.getCollection('review');
+    // const reviews = await collection.find(criteria).toArray()
+    var reviews = await collection
+      .aggregate([
+        {
+          $match: filterBy,
+        },
+        {
+          $lookup: {
+            from: 'user',
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'user',
+          },
+        },
+        {
+          $unwind: '$user',
+        },
+        {
+          $lookup: {
+            from: 'toys',
+            localField: 'toyId',
+            foreignField: '_id',
+            as: 'toy',
+          },
+        },
+        {
+          $unwind: '$toy',
+        },
+      ])
+      .toArray();
+    reviews = reviews.map((review) => {
+      review.user = {
+        _id: review.user._id,
+        username: review.user.username,
+      };
+      review.toy = {
+        _id: review.toy._id,
+        name: review.toy.name,
+        price: review.toy.price,
+      };
+      // delete review.userId;
+      // delete review.toyId;
+      return review;
+    });
 
-        return reviews
-    } catch (err) {
-        logger.error('cannot find reviews', err)
-        throw err
-    }
-
+    return reviews;
+  } catch (err) {
+    logger.error('cannot find reviews', err);
+    throw err;
+  }
 }
 
 async function remove(reviewId) {
-    try {
-        const store = asyncLocalStorage.getStore()
-        const { userId, isAdmin } = store
-        const collection = await dbService.getCollection('review')
-        // remove only if user is owner/admin
-        const query = { _id: ObjectId(reviewId) }
-        if (!isAdmin) query.byUserId = ObjectId(userId)
-        await collection.deleteOne(query)
-        // return await collection.deleteOne({ _id: ObjectId(reviewId), byUserId: ObjectId(userId) })
-    } catch (err) {
-        logger.error(`cannot remove review ${reviewId}`, err)
-        throw err
+  try {
+    const store = asyncLocalStorage.getStore();
+    const { userId, isAdmin } = store;
+    const collection = await dbService.getCollection('review');
+    // remove only if user is owner/admin
+    const query = { _id: ObjectId(reviewId) };
+    if (!isAdmin) query.userId = ObjectId(userId);
+    const res = await collection.deleteOne(query);
+    if (res.deletedCount === 0) {
+      throw new Error('cant remove rev');
     }
+    // return await collection.deleteOne({ _id: ObjectId(reviewId), byUserId: ObjectId(userId) })
+  } catch (err) {
+    logger.error(`cannot remove review ${reviewId}`, err);
+    throw err;
+  }
 }
 
-
 async function add(review) {
-    try {
-        // peek only updatable fields!
-        const reviewToAdd = {
-            byUserId: ObjectId(review.byUserId),
-            aboutUserId: ObjectId(review.aboutUserId),
-            txt: review.txt
-        }
-        const collection = await dbService.getCollection('review')
-        await collection.insertOne(reviewToAdd)
-        return reviewToAdd;
-    } catch (err) {
-        logger.error('cannot insert review', err)
-        throw err
-    }
+  try {
+    // peek only updatable fields!
+    const reviewToAdd = {
+      userId: ObjectId(review.userId),
+      toyId: ObjectId(review.toyId),
+      content: review.content,
+      rate: review.rate,
+    };
+    const collection = await dbService.getCollection('review');
+    await collection.insertOne(reviewToAdd);
+    return reviewToAdd;
+  } catch (err) {
+    logger.error('cannot insert review', err);
+    throw err;
+  }
 }
 
 function _buildCriteria(filterBy) {
-    const criteria = {}
-    return criteria
+  const criteria = {};
+  return criteria;
 }
 
 module.exports = {
-    query,
-    remove,
-    add
-}
-
-
+  query,
+  remove,
+  add,
+};

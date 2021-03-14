@@ -1,13 +1,14 @@
 .user {
-    padding-block-start: 20px;
+  padding-block-start: 20px;
+
   form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    >*{
-        margin-block-end: 10px;
+    > * {
+      margin-block-end: 10px;
     }
 
     input {
@@ -16,22 +17,23 @@
       border: transparent;
       outline: none;
     }
-    button {
-      padding: 10px;
-      border-radius: 8px;
-      border: transparent;
-      background-color: white;
-      transition: 2s;
-
-      &:hover {
-        background-color: transparent;
-        border: 1px solid white;
-      }
-    }
   }
-  .loggedIn{
+  .loggedIn {
     text-align: center;
     text-transform: capitalize;
     font-family: Shippori;
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 8px;
+    border: transparent;
+    background-color: white;
+    transition: 2s;
+
+    &:hover {
+      background-color: transparent;
+      border: 1px solid white;
+    }
   }
 }
