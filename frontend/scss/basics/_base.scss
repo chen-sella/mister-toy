@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: $clr1;
+  line-height: 1.6;
+}
+
+body {
+  background-color: $clr3;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  color: $clr1;
+}
+
+input{
+  color: $clr1;
+}
+
+a {
+  color: $clr1;
+}
+
+.app-main {
+  margin: 0 auto;
+  height: 86vh;
+}
+
+@media (max-width:1010px){
+  .app-main{
+    height: 100%;
+  }
+}

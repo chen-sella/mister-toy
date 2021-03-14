@@ -1,0 +1,26 @@
+.toy-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d9e4e4;
+  border-radius: 10px;
+  background-color: white;
+  margin-inline-end: 10px;
+  margin-block-end: 10px;
+}
+
+.toy-preview img {
+  width: 250px;
+  min-height: 190px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn-container >*{
+  margin-inline-end: 10px;
+  color: #f18b83;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+.toy-details {
+  padding-block-start: 20px;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > * {
+    margin-block-end: 10px;
+  }
+
+  img {
+    width: 540px;
+  }
+
+  h2 {
+    text-transform: capitalize;
+    font-family: Shippori;
+  }
+
+  p {
+    max-width: 60ch;
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 8px;
+    border: transparent;
+    background-color: white;
+    transition: 2s;
+
+    &:hover {
+      background-color: transparent;
+      border: 1px solid white;
+    }
+  }
+}

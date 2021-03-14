@@ -1,0 +1,21 @@
+.toy-details {
+  padding-block-start: 20px;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toy-details > * {
+  margin-block-end: 10px;
+}
+
+.toy-details img {
+  width: 400px;
+}
+
+.toy-details a {
+  color: #2c3e50;
+}

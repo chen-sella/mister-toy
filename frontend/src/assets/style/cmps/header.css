@@ -1,0 +1,32 @@
+.app-header {
+  background-color: white;
+}
+
+.header-content {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+}
+
+.header-content .logo{
+  font-size: 22px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content .logo>*{
+  margin-inline-end: 10px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #f18b83;
+}

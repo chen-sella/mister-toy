@@ -1,0 +1,53 @@
+.review-container {
+  .review-form {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      margin-block-end: 10px;
+    }
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: transparent;
+      outline: none;
+    }
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: transparent;
+      background-color: white;
+      transition: 2s;
+
+      &:hover {
+        background-color: transparent;
+        border: 1px solid white;
+      }
+    }
+    textarea {
+      border-radius: 8px;
+      border: 1px solid #c2c2c2;
+    }
+  }
+
+  .rate {
+    display: flex;
+    .review-rate {
+      > * {
+        margin-inline-end: 5px;
+      }
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+
+      li::after {
+        content: '☆';
+        color: orange;
+      }
+      li.fill::after {
+        content: '★';
+      }
+    }
+  }
+}

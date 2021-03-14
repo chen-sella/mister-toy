@@ -1,0 +1,53 @@
+.toy-edit form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block-start: 20px;
+}
+
+.toy-edit form input {
+  padding: 10px;
+  border-radius: 8px;
+  border: transparent;
+  outline: none;
+}
+
+.toy-edit form button {
+  padding: 10px;
+  border-radius: 8px;
+  border: transparent;
+  background-color: white;
+  transition: 2s;
+}
+
+.toy-edit form button:hover {
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+.toy-edit form > * {
+  margin-block-end: 10px;
+}
+
+.toy-edit .in-stock {
+  display: flex;
+  align-items: center;
+  margin-block-end: 10px;
+}
+
+.in-stock span {
+  display: inline-block;
+  margin-inline-start: 5px;
+  cursor: pointer;
+}
+
+.in-stock span::after {
+  content: '☐';
+  font-size: 25px;
+}
+
+.toy-edit .in-stock span.stock::after {
+  content: '☑︎';
+  font-size: 25px;
+}

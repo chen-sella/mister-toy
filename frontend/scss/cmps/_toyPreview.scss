@@ -1,0 +1,46 @@
+.toy-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d9e4e4;
+  border-radius: 10px;
+  background-color: white;
+  margin-inline-end: 10px;
+  margin-block-end: 10px;
+
+  img {
+    width: 230px;
+    min-height: 172px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .preview-content {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      text-transform: capitalize;
+      font-family: Shippori;
+    }
+    p {
+      font-size: 14px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      width: 80px;
+
+      > * {
+        color: $clr2;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+}

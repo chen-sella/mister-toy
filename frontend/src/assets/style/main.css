@@ -1,0 +1,38 @@
+@import './cmps/app.css';
+@import './cmps/home.css';
+@import './cmps/header.css';
+@import './cmps/toyApp.css';
+@import './cmps/toyPreview.css';
+@import './cmps/toyList.css';
+@import './cmps/edit.css';
+@import './cmps/toyDetails.css';
+@import './cmps/filter.css';
+
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: rgba(236, 232, 232, 0.897);
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-main {
+  margin: 0 auto;
+  height: 85vh;
+}
+

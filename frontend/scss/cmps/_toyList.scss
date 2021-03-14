@@ -1,0 +1,12 @@
+.toy-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-block-start: 10px;
+  min-height: 540px;
+}

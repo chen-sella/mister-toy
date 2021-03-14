@@ -1,0 +1,16 @@
+.toy-app {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+  padding-block-start: 20px;
+}
+
+.toy-app .add-toy {
+  color: #2c3e50;
+}
+
+.loader {
+  margin: 0 auto;
+}

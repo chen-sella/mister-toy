@@ -1,0 +1,60 @@
+.toy-edit {
+  text-align: center;
+
+  h2 {
+    font-family: Shippori;
+    margin-block-start: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-block-start: 20px;
+
+    > * {
+      margin-block-end: 10px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: transparent;
+      outline: none;
+    }
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: transparent;
+      background-color: white;
+      transition: 2s;
+
+      &:hover {
+        background-color: transparent;
+        border: 1px solid white;
+      }
+    }
+  }
+  .in-stock {
+    display: flex;
+    align-items: center;
+    margin-block-end: 10px;
+
+    span {
+      display: inline-block;
+      margin-inline-start: 5px;
+      cursor: pointer;
+
+      &::after {
+        content: '☐';
+        font-size: 25px;
+      }
+
+      &.stock::after {
+        content: '☑︎';
+        font-size: 25px;
+      }
+    }
+  }
+}
