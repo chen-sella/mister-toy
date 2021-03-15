@@ -3,8 +3,6 @@ const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterBy = {}) {
-  console.log('filterBy', filterBy);
-
   try {
     const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection('review');
@@ -106,8 +104,6 @@ function _buildCriteria(filterBy) {
   } else {
     criteria = {};
   }
-  // const criteria = {}
-  console.log(criteria);
   return criteria;
 }
 

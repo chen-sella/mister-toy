@@ -33,13 +33,13 @@
     .btn-container {
       display: flex;
       justify-content: space-between;
-      width: 80px;
 
       > * {
-        color: $clr2;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
+      
+        // color: $clr2;
+        // border: none;
+        // background-color: transparent;
+        // cursor: pointer;
       }
     }
   }

@@ -10,8 +10,14 @@
       </p>
       <button @click="addReview = !addReview">Add review</button>
       <add-review v-if="addReview" @reviewSaved="saveReview"></add-review>
-      <review-list v-if="toyReviews" :reviews="toyReviews" @removeReview="deleteReview"></review-list>
+      <review-list
+        v-if="toyReviews"
+        :reviews="toyReviews"
+        @removeReview="deleteReview"
+      ></review-list>
       <img :src="toy.img" />
+      <chat-room v-if="isChatOn" :toy="toy" :user="user" @closeChat="isChatOn = false"></chat-room>
+      <el-button class="chat-btn" @click="isChatOn = true" size="default" v-else icon="el-icon-chat-dot-round" circle></el-button>
       <router-link to="/toy">Back</router-link>
     </div>
     <section v-if="isLoading" class="loader">
@@ -24,6 +30,7 @@
 import { toyService } from "../services/toy-service.js";
 import addReview from "../cmps/addReview";
 import reviewList from "../cmps/review-list";
+import chatRoom from "../cmps/chat-room";
 
 export default {
   name: "toyDetails",
@@ -32,6 +39,7 @@ export default {
       toy: null,
       addReview: false,
       toyReviews: null,
+      isChatOn: null,
     };
   },
   methods: {
@@ -41,18 +49,18 @@ export default {
       });
     },
     saveReview(review) {
-      review.toyId = this.$route.params.toyId;
+      review.toyId = this.toyId;
       console.log("review", review);
       this.$store.dispatch({ type: "addReview", review });
       this.addReview = false;
       this.loadReviews();
     },
-    deleteReview(id){
-      this.$store.dispatch({type:'removeReview', id})
+    deleteReview(id) {
+      this.$store.dispatch({ type: "removeReview", id });
     },
     async loadReviews() {
       try {
-        const id = this.$route.params.toyId;
+        const id = this.toyId;
         await this.$store.dispatch({
           type: "loadReviews",
           filterBy: { toyId: id },
@@ -67,9 +75,15 @@ export default {
     isLoading() {
       return this.$store.getters.isLoading;
     },
+    toyId() {
+      return this.$route.params.toyId;
+    },
+    user() {
+      return this.$store.getters.loggedInUser;
+    },
   },
   created() {
-    const id = this.$route.params.toyId;
+    const id = this.toyId;
     this.getToyById(id);
   },
   mounted() {
@@ -78,6 +92,7 @@ export default {
   components: {
     addReview,
     reviewList,
+    chatRoom,
   },
 };
 </script>

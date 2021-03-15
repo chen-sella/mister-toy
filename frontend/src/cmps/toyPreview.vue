@@ -2,15 +2,20 @@
   <li class="toy-preview">
     <div class="preview-content">
       <h3>{{ toy.name }}</h3>
+
       <p>Price: ${{ toy.price }}</p>
       <div class="btn-container">
-        <router-link :to="'/edit/' + toy._id"
-          ><i class="far fa-edit"></i
-        ></router-link>
-        <router-link :to="'/toy/' + toy._id"
-          ><i class="fas fa-info"></i
-        ></router-link>
-        <button @click="removeToy"><i class="far fa-trash-alt"></i></button>
+        <router-link :to="'/edit/' + toy._id">
+          <el-button icon="el-icon-edit" circle></el-button>
+        </router-link>
+        <router-link :to="'/toy/' + toy._id">
+          <el-button icon="el-icon-info" circle></el-button>
+        </router-link>
+        <el-button
+          @click="removeToy"
+          icon="el-icon-delete-solid"
+          circle
+        ></el-button>
       </div>
     </div>
     <img :src="toy.img" />
@@ -18,6 +23,12 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faTrash);
+library.add(faInfo);
 export default {
   name: "toyPreview",
   props: {

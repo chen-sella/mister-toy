@@ -36,4 +36,14 @@
       border: 1px solid white;
     }
   }
+  .chat-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #4f4f4f;
+  }
 }
