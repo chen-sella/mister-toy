@@ -1,16 +1,37 @@
-.toy-filter {
-  margin-block-end: 10px;
-  > * {
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    box-shadow: 0px 0px 4px 0px #878787;
-  }
-  input {
-    padding: 11px;
-    margin-inline-end: 5px;
-  }
-  select {
-    padding: 10px;
+.toy-filter-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  .label {
+    font-size: 0.8rem;
+    text-align: left;
+    padding-left: 5px;
   }
 }
+.selects-container {
+  display: flex;
+  > * {
+    max-width: 120px;
+    margin-inline-start: 10px;
+  }
+}
+.filter-item:first-of-type {
+  flex: 1;
+}
+// @include for-normal-layout {
+//   .toy-filter-container {
+//     flex-direction: column;
+//   }
+//   .selects-container {
+//     margin-top: 10px;
+//     :first-child {
+//       margin-inline-start: 0;
+//     }
+//     > * {
+//       max-width: 400px;
+//     }
+//   }

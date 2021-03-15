@@ -1,23 +1,40 @@
 <template>
   <section class="app-main">
     <div v-if="toy" class="toy-details">
-      <h2>{{ toy.name }}</h2>
-      <p>Price: ${{ toy.price }}</p>
-      <p>Type: {{ toy.type }}</p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est qui labore
-        itaque, sed rerum facere, illum soluta veritatis maiores saepe magnam.
-      </p>
-      <button @click="addReview = !addReview">Add review</button>
-      <add-review v-if="addReview" @reviewSaved="saveReview"></add-review>
+      <section class="detailes-container">
+        <section class="txt-container">
+          <h2>{{ toy.name }}</h2>
+          <p>Price: ${{ toy.price }}</p>
+          <p>Type: {{ toy.type }}</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est qui
+            labore itaque, sed rerum facere, illum soluta veritatis maiores
+            saepe magnam.
+          </p>
+          <button @click="addReview = !addReview">Add review</button>
+          <add-review v-if="addReview" @reviewSaved="saveReview"></add-review>
+        </section>
+        <img :src="toy.img" />
+      </section>
       <review-list
         v-if="toyReviews"
         :reviews="toyReviews"
         @removeReview="deleteReview"
       ></review-list>
-      <img :src="toy.img" />
-      <chat-room v-if="isChatOn" :toy="toy" :user="user" @closeChat="isChatOn = false"></chat-room>
-      <el-button class="chat-btn" @click="isChatOn = true" size="default" v-else icon="el-icon-chat-dot-round" circle></el-button>
+      <chat-room
+        v-if="isChatOn"
+        :toy="toy"
+        :user="user"
+        @closeChat="isChatOn = false"
+      ></chat-room>
+      <el-button
+        class="chat-btn"
+        @click="isChatOn = true"
+        size="default"
+        v-else
+        icon="el-icon-chat-dot-round"
+        circle
+      ></el-button>
       <router-link to="/toy">Back</router-link>
     </div>
     <section v-if="isLoading" class="loader">

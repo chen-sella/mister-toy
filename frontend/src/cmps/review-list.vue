@@ -6,7 +6,13 @@
       </ul>
       <h2 v-if="rev.user.username">{{ rev.user.username }}</h2>
       <p>{{ rev.content }}</p>
-      <button @click="removeReview(rev._id)">x</button>
+      <!-- <button @click="removeReview(rev._id)">x</button> -->
+      <el-button
+        class="close-chat"
+        icon="el-icon-close"
+        circle
+        @click="removeReview(rev._id)"
+      ></el-button>
     </li>
   </ul>
 </template>

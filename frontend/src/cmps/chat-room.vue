@@ -1,14 +1,16 @@
 <template>
   <div class="chat-container">
     <section class="chat-header">
-      <h4>Lets Chat About- {{ toy.name }}</h4>
-      <el-button
-        class="close-chat"
-        icon="el-icon-close"
-        circle
-        @click="closeChat"
-      ></el-button>
-      <p v-if="isTyping">is typing</p>
+      <section class="header-content">
+        <h4>Lets Chat About- {{ toy.name }}</h4>
+        <el-button
+          class="close-chat"
+          icon="el-icon-close"
+          circle
+          @click="closeChat"
+        ></el-button>
+      </section>
+      <p v-if="isTyping">is typing...</p>
     </section>
     <section class="chat-content">
       <ul class="msgs-container">
@@ -18,7 +20,7 @@
       </ul>
     </section>
     <form @submit.prevent="sendMsg">
-      <input @input="onInput" type="text" v-model="msg.txt" />
+      <input @input="onInput" ref="input" type="text" v-model="msg.txt" />
       <button>Send</button>
     </form>
   </div>
@@ -52,7 +54,9 @@ export default {
     socketService.on("chat addMsg", this.addMsg);
     socketService.on("chat incoming-msg", () => this.toggleTyping(true));
     socketService.on("stop typing", () => this.toggleTyping(false));
-    this.debounce = utilService.debounce(()=>socketService.emit("chat user-typing", false));
+    this.debounce = utilService.debounce(() =>
+      socketService.emit("chat user-typing", false)
+    );
   },
   destroyed() {
     socketService.off("chat addMsg", this.addMsg);
@@ -81,6 +85,9 @@ export default {
       socketService.emit("chat user-typing", true);
       this.debounce();
     },
+  },
+  mounted() {
+    this.$refs.input.focus();
   },
 };
 </script>

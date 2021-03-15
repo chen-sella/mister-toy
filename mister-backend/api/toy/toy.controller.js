@@ -10,8 +10,10 @@ module.exports = {
 
 // Get list Of Toys:
 async function getToys(req, res) {
+  const filter = JSON.parse(req.query.filterBy);
+  console.log('filter', filter);
   try {
-    const toys = await toyService.query();
+    const toys = await toyService.query(filter);
     res.send(toys);
   } catch (err) {
     // logger.error('Cannot get toys', err);

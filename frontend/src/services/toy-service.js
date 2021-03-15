@@ -15,27 +15,23 @@ export const toyService = {
   getEmptyToy,
 };
 
-// var gToys = _createToys();
-
-async function query() {
+async function query(filterBy) {
   try {
-    const toys = await httpService.get(TOY_URL);
+    const queryStr = `?filterBy=${JSON.stringify(filterBy)}`;
+    const toys = await httpService.get(TOY_URL+queryStr);
     return toys;
   } catch (err) {
     console.log(err);
   }
-  // return axios.get(TOY_URL, { params: filterBy }).then(({ data }) => data);
 }
 
 async function getById(id) {
-  // return storageService.get(KEY, id);
   try {
     const toy = await httpService.get(TOY_URL + id);
     return toy;
   } catch (err) {
     console.log('cannot get toy by id', err);
   }
-  // return axios.get(TOY_URL + id).then(({ data }) => data);
 }
 
 async function remove(id) {
@@ -45,7 +41,6 @@ async function remove(id) {
   } catch (err) {
     console.log('cannot remove toy', err);
   }
-  // return axios.delete(TOY_URL + id).then(({ data }) => data);
 }
 
 async function save(toy) {
@@ -53,10 +48,8 @@ async function save(toy) {
   try {
     if (toy._id) {
       newToy = await httpService.put(TOY_URL + toy._id, toy);
-      // return axios.put(TOY_URL + toy._id, toy).then(({ data }) => data);
     } else {
       newToy = await httpService.post(TOY_URL, toy);
-      // return axios.post(TOY_URL, toy).then(({ data }) => data);
     }
     return newToy;
   } catch (err) {

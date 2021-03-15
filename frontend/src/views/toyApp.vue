@@ -31,7 +31,7 @@ export default {
       });
     },
     setFilter(filterBy) {
-      filterBy.pageIdx = this.page;
+      // filterBy.pageIdx = this.page;
       console.log("filterBy", filterBy);
       this.$store.commit({ type: "filter", filterBy });
       this.$store.dispatch("loadToys");

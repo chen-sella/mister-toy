@@ -10,13 +10,23 @@
 
   .chat-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 10px 10px;
-    align-items: center;
     color: $clr1;
+    height: 70px;
 
-    .close-chat {
-      background-color: #eae8e8d1;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .close-chat {
+        background-color: #eae8e8d1;
+      }
+    }
+    p {
+      font-size: 14px;
     }
   }
 

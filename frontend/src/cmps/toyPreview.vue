@@ -23,12 +23,6 @@
 </template>
 
 <script>
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
-
-library.add(faTrash);
-library.add(faInfo);
 export default {
   name: "toyPreview",
   props: {

@@ -1,13 +1,6 @@
 <template>
   <section class="review-container">
     <form class="review-form" @submit.prevent="saveReview">
-      <!-- <input
-        id="name"
-        type="text"
-        ref="start"
-        placeholder="toy player"
-        v-model="review.name"
-      /> -->
       <div class="rate">
         <label for="rate">Rate:</label>
         <ul class="review-rate">
@@ -46,9 +39,6 @@ export default {
       this.review.rate = rate;
     },
   },
-  // mounted() {
-  //   this.$refs.start.focus();
-  // },
 };
 </script>
 

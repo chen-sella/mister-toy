@@ -4,7 +4,12 @@ export const toyStore = {
   strict: true,
   state: {
     toys: null,
-    filterBy: { filter: 'all', searchStr: '', pageIdx: 0 },
+    filterBy: {
+      name: '',
+      isInStock: 'all',
+      type: 'all',
+      sortBy: 'name',
+    },
     maxPageIdx: null,
   },
   getters: {
@@ -31,7 +36,6 @@ export const toyStore = {
       state.toys.splice(idx, 1);
     },
     filter(state, { filterBy }) {
-      console.log(filterBy);
       state.filterBy = filterBy;
     },
     nextPage(state, { pageIdx }) {
@@ -46,7 +50,7 @@ export const toyStore = {
     async loadToys({ commit, state }) {
       commit({ type: 'setLoading', isLoading: true });
       try {
-        const toys = await toyService.query();
+        const toys = await toyService.query(state.filterBy);
         console.log('toys', toys);
         commit({ type: 'setToys', toys });
         // commit({type:'updateMaxPage', maxPage})
