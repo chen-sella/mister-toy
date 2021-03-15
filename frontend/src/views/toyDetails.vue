@@ -10,7 +10,7 @@
       </p>
       <button @click="addReview = !addReview">Add review</button>
       <add-review v-if="addReview" @reviewSaved="saveReview"></add-review>
-      <review-list></review-list>
+      <review-list v-if="toyReviews" :reviews="toyReviews" @removeReview="deleteReview"></review-list>
       <img :src="toy.img" />
       <router-link to="/toy">Back</router-link>
     </div>
@@ -44,6 +44,23 @@ export default {
       review.toyId = this.$route.params.toyId;
       console.log("review", review);
       this.$store.dispatch({ type: "addReview", review });
+      this.addReview = false;
+      this.loadReviews();
+    },
+    deleteReview(id){
+      this.$store.dispatch({type:'removeReview', id})
+    },
+    async loadReviews() {
+      try {
+        const id = this.$route.params.toyId;
+        await this.$store.dispatch({
+          type: "loadReviews",
+          filterBy: { toyId: id },
+        });
+        this.toyReviews = this.$store.getters.reviewsToShow;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   computed: {
@@ -54,10 +71,9 @@ export default {
   created() {
     const id = this.$route.params.toyId;
     this.getToyById(id);
-    this.toyReviews = this.$store.dispatch({
-      type: "loadReviews",
-      filterBy: { toyId: id },
-    });
+  },
+  mounted() {
+    this.loadReviews();
   },
   components: {
     addReview,

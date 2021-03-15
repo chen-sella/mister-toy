@@ -19,6 +19,7 @@ async function deleteReview(req, res) {
   } catch (err) {
     logger.error('Failed to delete review', err);
     res.status(500).send({ err: 'Failed to delete review' });
+    throw new Error('Cant remove review');
   }
 }
 
